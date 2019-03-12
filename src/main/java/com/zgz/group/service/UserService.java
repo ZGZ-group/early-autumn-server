@@ -1,6 +1,6 @@
 package com.zgz.group.service;
 
-import com.base.domain.User;
+import com.zgz.group.domain.User;
 
 public interface UserService {
 

@@ -1,6 +1,6 @@
 package com.zgz.group.service;
 
-import com.base.domain.RoleResource;
+import com.zgz.group.domain.RoleResource;
 
 import java.util.List;
 import java.util.Set;

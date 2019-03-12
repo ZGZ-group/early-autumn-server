@@ -1,9 +1,9 @@
 package com.zgz.group.config.security;
 
-import com.base.domain.Account;
-import com.base.domain.Role;
-import com.base.service.AccountService;
-import com.base.service.RoleService;
+import com.zgz.group.domain.Account;
+import com.zgz.group.domain.Role;
+import com.zgz.group.service.AccountService;
+import com.zgz.group.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

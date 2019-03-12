@@ -1,9 +1,9 @@
 package com.zgz.group.service.impl;
 
-import com.base.dao.ResourceMapper;
-import com.base.domain.Resource;
-import com.base.service.ResourceService;
-import com.base.util.CollectionUtil;
+import com.zgz.group.dao.ResourceMapper;
+import com.zgz.group.domain.Resource;
+import com.zgz.group.service.ResourceService;
+import com.zgz.group.util.CollectionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

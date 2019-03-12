@@ -1,9 +1,9 @@
 package com.zgz.group.service.impl;
 
-import com.base.dao.RoleResourceMapper;
-import com.base.domain.RoleResource;
-import com.base.service.RoleResourceService;
-import com.base.util.CollectionUtil;
+import com.zgz.group.dao.RoleResourceMapper;
+import com.zgz.group.domain.RoleResource;
+import com.zgz.group.service.RoleResourceService;
+import com.zgz.group.util.CollectionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.zgz.group.dao;
 
-import com.base.domain.Account;
+import com.zgz.group.domain.Account;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

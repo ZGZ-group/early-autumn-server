@@ -1,10 +1,10 @@
 package com.zgz.group.service.impl;
 
-import com.base.dao.RoleMapper;
-import com.base.domain.Role;
-import com.base.service.RoleService;
-import com.base.util.CollectionUtil;
-import com.base.util.StringUtil;
+import com.zgz.group.dao.RoleMapper;
+import com.zgz.group.domain.Role;
+import com.zgz.group.service.RoleService;
+import com.zgz.group.util.CollectionUtil;
+import com.zgz.group.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,8 @@
 package com.zgz.group.service.impl;
 
-import com.base.dao.UserMapper;
-import com.base.domain.User;
-import com.base.service.UserService;
+import com.zgz.group.dao.UserMapper;
+import com.zgz.group.domain.User;
+import com.zgz.group.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.zgz.group.service;
 
-import com.base.domain.Resource;
+import com.zgz.group.domain.Resource;
 
 import java.util.List;
 

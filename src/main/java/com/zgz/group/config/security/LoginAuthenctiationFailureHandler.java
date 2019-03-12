@@ -1,6 +1,6 @@
 package com.zgz.group.config.security;
 
-import com.base.bean.BaseResponse;
+import com.zgz.group.bean.BaseResponse;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

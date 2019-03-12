@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.base.dao.AccountMapper">
+<mapper namespace="com.zgz.group.dao.AccountMapper">
 
-    <resultMap id="BaseResultMap" type="com.base.domain.Account">
+    <resultMap id="BaseResultMap" type="com.zgz.group.domain.Account">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="is_account_non_expired" property="isAccountNonExpired" jdbcType="BOOLEAN"/>
@@ -38,7 +38,7 @@
           username = #{username,jdbcType=VARCHAR}
     </select>
 
-    <insert id="addAccount" parameterType="com.base.domain.Account">
+    <insert id="addAccount" parameterType="com.zgz.group.domain.Account">
         insert
         into
           <include refid="Base_Table"/>

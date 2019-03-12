@@ -1,10 +1,10 @@
 package com.zgz.group.config.security;
 
-import com.base.domain.Resource;
-import com.base.domain.RoleResource;
-import com.base.service.ResourceService;
-import com.base.service.RoleResourceService;
-import com.base.util.CollectionUtil;
+import com.zgz.group.domain.Resource;
+import com.zgz.group.domain.RoleResource;
+import com.zgz.group.service.ResourceService;
+import com.zgz.group.service.RoleResourceService;
+import com.zgz.group.util.CollectionUtil;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;

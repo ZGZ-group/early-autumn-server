@@ -1,6 +1,6 @@
 package com.zgz.group.dao;
 
-import com.base.domain.Role;
+import com.zgz.group.domain.Role;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

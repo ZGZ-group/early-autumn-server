@@ -1,6 +1,6 @@
 package com.zgz.group.service;
 
-import com.base.domain.Account;
+import com.zgz.group.domain.Account;
 
 public interface AccountService {
     Account getAccountByUserName(String username);

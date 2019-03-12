@@ -1,6 +1,6 @@
 package com.zgz.group.controller;
 
-import com.base.bean.BaseResponse;
+import com.zgz.group.bean.BaseResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
