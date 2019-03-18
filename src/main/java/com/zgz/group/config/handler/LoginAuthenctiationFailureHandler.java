@@ -1,7 +1,8 @@
-package com.zgz.group.config.security;
+package com.zgz.group.config.handler;
 
-import com.zgz.group.bean.BaseResponse;
 import com.google.gson.Gson;
+import com.zgz.group.bean.BaseResponse;
+import com.zgz.group.constant.AppConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
@@ -27,8 +28,8 @@ public class LoginAuthenctiationFailureHandler extends SimpleUrlAuthenticationFa
                                         AuthenticationException exception) throws IOException, ServletException {
 
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        response.setCharacterEncoding(SecurityConstant.JSON_CONTENT_TYPE);
-        response.setContentType(SecurityConstant.ENCODE);
+        response.setCharacterEncoding(AppConstant.ENCODE);
+        response.setContentType(SecurityConstant.JSON_CONTENT_TYPE);
 
         //TODO 后续优化在JsonUtil内
         Gson gson = new Gson();
@@ -38,6 +39,7 @@ public class LoginAuthenctiationFailureHandler extends SimpleUrlAuthenticationFa
         PrintWriter out = response.getWriter();
         out.write(error);
         out.close();
+        out.flush();
 
     }
 
