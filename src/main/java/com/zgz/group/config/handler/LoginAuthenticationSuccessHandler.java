@@ -1,8 +1,10 @@
 package com.zgz.group.config.security;
 
-import com.zgz.group.bean.BaseResponse;
 import com.google.gson.Gson;
 import com.zgz.group.util.JsonUtil;
+import com.zgz.group.bean.BaseResponse;
+import com.zgz.group.config.jwt.JWTUtil;
+import com.zgz.group.constant.AppConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -27,18 +29,21 @@ public class LoginAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws ServletException, IOException {
 
-        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        response.setCharacterEncoding(SecurityConstant.ENCODE);
+        String username = authentication.getName();
+        response.addHeader(SecurityConstant.HEADER, JWTUtil.builderToken(username));
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setCharacterEncoding(AppConstant.ENCODE);
         response.setContentType(SecurityConstant.JSON_CONTENT_TYPE);
 
 
+        logger.info("用户[{]]登录成功!", username);
         BaseResponse successResponse = BaseResponse.SUCCESS_RESPONSE;
         String success = JsonUtil.toJson(successResponse);
 
         PrintWriter out = response.getWriter();
         out.write(success);
         out.close();
-
+        out.flush();
     }
 
 }

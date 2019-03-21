@@ -1,6 +1,9 @@
 package com.zgz.group.config;
 
-import com.zgz.group.config.security.*;
+import com.zgz.group.config.handler.*;
+import com.zgz.group.config.jwt.JWTAuthenticationFilter;
+import com.zgz.group.config.security.UrlFilterInvocationSecurityMetadataSource;
+import com.zgz.group.config.security.UrlFilterSecurityInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,9 +33,6 @@ import java.util.List;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String AUTH_SUFFIX = "AUTH_";
-    private static final String REMEMBER_ME = "remember-me";
-    private static final int TOKEN_VALIDITY_SECONDS = 300;
 
     private UserDetailsService userDetailsService;
 
@@ -40,12 +40,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler;
     private AuthenticationAccessDeniedHandler authenticationAccessDeniedHandler;
 
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
     private UrlFilterInvocationSecurityMetadataSource securityMetadataSource;
 
     private DataSource dataSource;   //是在application.properites
 
 
-    //加密工具,默认BCrypt算法加密,加密规则{加密算法名}-加密后密码
+    //加密工具,默认BCrypt算法加密,加密规则{加密算法名}加密后密码
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
@@ -81,28 +83,34 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         //自定义过滤器
         UrlFilterSecurityInterceptor filterSecurityInterceptor =
-                new UrlFilterSecurityInterceptor(securityMetadataSource,
-                        accessDecisionManager(), authenticationManagerBean());
+                new UrlFilterSecurityInterceptor(securityMetadataSource, accessDecisionManager(), authenticationManagerBean());
 
         //加入自定定义的授权过滤器
+        http.addFilter(new JWTAuthenticationFilter(authenticationManager()));
         http.addFilterAt(filterSecurityInterceptor, FilterSecurityInterceptor.class);
+
+        //禁用session
+//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http
                 .formLogin()
-                .successHandler(loginAuthenticationSuccessHandler)
-                .failureHandler(loginAuthenctiationFailureHandler)
-                .permitAll()  //表单登录，permitAll()表示这个不需要验证 登录页面，登录失败页面
+                .loginProcessingUrl(SecurityConstant.LOGIN_URL)//登录URL
+                .successHandler(loginAuthenticationSuccessHandler)//登录成功处理器
+                .failureHandler(loginAuthenctiationFailureHandler)//登录失败处理
+                .permitAll()//不过拦截器
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(authenticationAccessDeniedHandler) //权限不足处理
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint) // 未登录处理
                 .and()
                 .logout()
-                .permitAll()
+                .logoutUrl(SecurityConstant.LOGOUT_URL)//登出URL
+                .permitAll()//不过拦截器
                 .and()
                 .rememberMe()
-                .rememberMeParameter(REMEMBER_ME).userDetailsService(userDetailsService)
+                .rememberMeParameter(SecurityConstant.REMEMBER_ME).userDetailsService(userDetailsService)
                 .tokenRepository(persistentTokenRepository())
-                .tokenValiditySeconds(TOKEN_VALIDITY_SECONDS)
+                .tokenValiditySeconds(SecurityConstant.TOKEN_VALIDITY_SECONDS)
                 .and()
                 .authorizeRequests()
                 .anyRequest().authenticated()//必须经过认证以后才能访问
@@ -119,7 +127,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         decisionVoters.add(new AuthenticatedVoter());
         decisionVoters.add(new RoleVoter());//角色投票器,默认前缀为ROLE_
         RoleVoter AuthVoter = new RoleVoter();
-        AuthVoter.setRolePrefix(AUTH_SUFFIX);//特殊权限投票器,修改前缀为AUTH_
+        AuthVoter.setRolePrefix(SecurityConstant.AUTH_SUFFIX);//特殊权限投票器,修改前缀为AUTH_
         decisionVoters.add(AuthVoter);
         return new AffirmativeBased(decisionVoters);
     }
@@ -169,5 +177,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void setSecurityMetadataSource(UrlFilterInvocationSecurityMetadataSource securityMetadataSource) {
         this.securityMetadataSource = securityMetadataSource;
+    }
+
+    @Autowired
+    public void setJwtAuthenticationEntryPoint(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint) {
+        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
     }
 }

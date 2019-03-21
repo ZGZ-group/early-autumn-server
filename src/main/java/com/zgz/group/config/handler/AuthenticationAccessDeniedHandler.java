@@ -3,6 +3,7 @@ package com.zgz.group.config.security;
 
 import com.zgz.group.bean.BaseResponse;
 import com.zgz.group.util.JsonUtil;
+import com.zgz.group.constant.AppConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
@@ -26,9 +27,8 @@ public class AuthenticationAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse resp, AccessDeniedException e) throws IOException, ServletException {
         resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        resp.setCharacterEncoding(SecurityConstant.JSON_CONTENT_TYPE);
-        resp.setContentType(SecurityConstant.ENCODE);
-
+        resp.setCharacterEncoding(AppConstant.ENCODE);
+        resp.setContentType(SecurityConstant.JSON_CONTENT_TYPE);
 
         BaseResponse errorResponse = BaseResponse.newErrorResponse("权限不足！请联系管理员");
         String error = JsonUtil.toJson(errorResponse);
@@ -36,6 +36,7 @@ public class AuthenticationAccessDeniedHandler implements AccessDeniedHandler {
         PrintWriter out = resp.getWriter();
         out.write(error);
         out.close();
+        out.flush();
     }
 
 }

@@ -1,0 +1,13 @@
+server:
+  servlet:
+    context-path: /earlyautumn
+  port: 80
+
+#库配置
+
+database:
+  earlyautumn:
+    driver: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://119.29.213.13:3306/db_base?useSSL=false
