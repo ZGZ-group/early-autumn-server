@@ -1,4 +1,4 @@
-package com.zgz.group.config.security;
+package com.zgz.group.config.handler;
 
 import com.zgz.group.bean.BaseResponse;
 import com.google.gson.Gson;
@@ -30,7 +30,7 @@ public class LoginAuthenctiationFailureHandler extends SimpleUrlAuthenticationFa
 
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         response.setCharacterEncoding(AppConstant.ENCODE);
-        response.setContentType(SecurityConstant.JSON_CONTENT_TYPE);
+        response.setContentType(AppConstant.JSON_CONTENT_TYPE);
 
         BaseResponse successResponse = BaseResponse.ERROR_RESPONSE;
         String error = JsonUtil.toJson(successResponse);

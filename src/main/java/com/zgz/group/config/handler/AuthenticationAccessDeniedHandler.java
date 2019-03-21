@@ -1,4 +1,4 @@
-package com.zgz.group.config.security;
+package com.zgz.group.config.handler;
 
 
 import com.zgz.group.bean.BaseResponse;
@@ -28,7 +28,7 @@ public class AuthenticationAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse resp, AccessDeniedException e) throws IOException, ServletException {
         resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
         resp.setCharacterEncoding(AppConstant.ENCODE);
-        resp.setContentType(SecurityConstant.JSON_CONTENT_TYPE);
+        resp.setContentType(AppConstant.JSON_CONTENT_TYPE);
 
         BaseResponse errorResponse = BaseResponse.newErrorResponse("权限不足！请联系管理员");
         String error = JsonUtil.toJson(errorResponse);

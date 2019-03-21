@@ -1,4 +1,4 @@
-package com.zgz.group.config.security;
+package com.zgz.group.config.handler;
 
 import com.google.gson.Gson;
 import com.zgz.group.util.JsonUtil;
@@ -33,7 +33,7 @@ public class LoginAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
         response.addHeader(SecurityConstant.HEADER, JWTUtil.builderToken(username));
         response.setStatus(HttpServletResponse.SC_OK);
         response.setCharacterEncoding(AppConstant.ENCODE);
-        response.setContentType(SecurityConstant.JSON_CONTENT_TYPE);
+        response.setContentType(AppConstant.JSON_CONTENT_TYPE);
 
 
         logger.info("用户[{]]登录成功!", username);
