@@ -2,6 +2,7 @@ package com.zgz.group.config.security;
 
 import com.zgz.group.bean.BaseResponse;
 import com.google.gson.Gson;
+import com.zgz.group.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -30,10 +31,9 @@ public class LoginAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
         response.setCharacterEncoding(SecurityConstant.ENCODE);
         response.setContentType(SecurityConstant.JSON_CONTENT_TYPE);
 
-        //TODO 后续优化在JsonUtil内
-        Gson gson = new Gson();
+
         BaseResponse successResponse = BaseResponse.SUCCESS_RESPONSE;
-        String success = gson.toJson(successResponse);
+        String success = JsonUtil.toJson(successResponse);
 
         PrintWriter out = response.getWriter();
         out.write(success);

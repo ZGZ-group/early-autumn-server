@@ -2,7 +2,7 @@ package com.zgz.group.config.security;
 
 
 import com.zgz.group.bean.BaseResponse;
-import com.google.gson.Gson;
+import com.zgz.group.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
@@ -29,10 +29,9 @@ public class AuthenticationAccessDeniedHandler implements AccessDeniedHandler {
         resp.setCharacterEncoding(SecurityConstant.JSON_CONTENT_TYPE);
         resp.setContentType(SecurityConstant.ENCODE);
 
-        //TODO 后续优化在JsonUtil内
-        Gson gson = new Gson();
+
         BaseResponse errorResponse = BaseResponse.newErrorResponse("权限不足！请联系管理员");
-        String error = gson.toJson(errorResponse);
+        String error = JsonUtil.toJson(errorResponse);
 
         PrintWriter out = resp.getWriter();
         out.write(error);
